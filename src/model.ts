@@ -35,7 +35,7 @@ export class ImageDetail {
     const $ = cheerio.load(entry.content.$t, {xmlMode: true});
     return new ImageDetail(
       entry.title.$t,
-      $("img").attr("src"),
+      `${$("img").attr("src")}`,
       $("div").last().text(),
       entry.category.map((e, i) => e.term)
     );

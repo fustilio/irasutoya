@@ -1,4 +1,3 @@
-import "jest";
 import * as irasutoya from "../src/irasutoya";
 
 test("randomImage", async () => {
