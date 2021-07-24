@@ -1,4 +1,4 @@
-import * as irasutoya from "../src/irasutoya";
+import * as irasutoya from "../src";
 
 test("randomImage", async () => {
   const detailImage = await irasutoya.randomImage();
