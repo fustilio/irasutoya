@@ -1,1 +1,2 @@
-export * from "./irasutoya";
+export * from "./api";
+export * from "./server";
