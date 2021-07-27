@@ -22,7 +22,7 @@
     "publish:major": "npm version major && git push origin master --tags && npm publish ./"
   },
   "engines": {
-    "node": "9.x"
+    "node": "9.x || 15.x"
   },
   "keywords": [
     "irasutoya",
