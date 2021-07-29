@@ -1,13 +1,13 @@
 import * as cheerio from "cheerio";
 
-export class SummaryResuponse {
+export class SummaryResponse {
   constructor(
     public totalResults: number,
     public imageDetails: ImageDetail[]
   ) {}
 
-  static parseJson(json: any): SummaryResuponse {
-    return new SummaryResuponse(
+  static parseJson(json: any): SummaryResponse {
+    return new SummaryResponse(
       +json.feed.openSearch$totalResults.$t,
       json.feed.entry ? json.feed.entry.map((e, i) => ImageDetail.parseJsonEntry(e)) : []
     );

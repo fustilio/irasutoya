@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import * as model from "./model";
+import { SummaryResponse, ImageDetail } from "./model";
 
 namespace API {
   const hostname = "www.irasutoya.com";
@@ -22,13 +22,13 @@ namespace API {
   }
 }
 
-async function requestImageEntry(startIndex: number, results: number, query?: string): Promise<model.SummaryResuponse> {
+async function requestImageEntry(startIndex: number, results: number, query?: string): Promise<SummaryResponse> {
   if (startIndex <= 0) { throw "startIndex must be greater than 0"; }
   let params: API.Parameter = {"start-index": startIndex, "max-results": results};
   if (query) { params["q"] = encodeURIComponent(query); }
   const url = API.buildUrl(API.Endpoint.SUMMARY, params);
   const json = await fetchJson(url);
-  return model.SummaryResuponse.parseJson(json);
+  return SummaryResponse.parseJson(json);
 }
 
 async function fetchJson(url: string): Promise<any> {
@@ -36,7 +36,7 @@ async function fetchJson(url: string): Promise<any> {
   return res.json();
 }
 
-export async function search(query: string): Promise<model.ImageDetail[]> {
+export async function search(query: string): Promise<ImageDetail[]> {
   return (await requestImageEntry(1, 20, query)).imageDetails;
 }
 
@@ -44,7 +44,7 @@ export async function totalImageCount(): Promise<number> {
   return (await requestImageEntry(1, 0)).totalResults;
 }
 
-export async function randomImage(): Promise<model.ImageDetail> {
+export async function randomImage(): Promise<ImageDetail> {
   const maxIndex = await totalImageCount() - 1;
   const index = Math.floor(Math.random() * maxIndex) + 1;
   return (await requestImageEntry(index, 1)).imageDetails[0];
